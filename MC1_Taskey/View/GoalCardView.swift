@@ -1,6 +1,7 @@
 //
 //  GoalCardView.swift
-//  MC1_Polar
+//  MC1_Taskey
+//  Polar
 //
 //  Created by Ilia Sedelkin on 27/10/22.
 //

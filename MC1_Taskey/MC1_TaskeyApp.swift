@@ -1,6 +1,7 @@
 //
-//  MC1_PolarApp.swift
-//  MC1_Polar
+//  MC1_TaskeyApp.swift
+//  MC1_Taskey
+//  Polar
 //
 //  Created by Marco Agizza on 19/10/22.
 //

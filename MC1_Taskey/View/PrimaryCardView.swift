@@ -1,6 +1,7 @@
 //
 //  PrimaryCardView.swift
-//  MC1_Polar
+//  MC1_Taskey
+//  Polar
 //
 //  Created by Ilia Sedelkin on 21/10/22.
 //

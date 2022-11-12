@@ -1,6 +1,7 @@
 //
 //  Goal.swift
-//  MC1_Polar
+//  MC1_Taskey
+//  Polar
 //
 //  Created by Ilia Sedelkin on 20/10/22.
 //
