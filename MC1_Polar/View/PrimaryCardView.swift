@@ -11,6 +11,7 @@ struct PrimaryCardView: View {
     
     var goal: Goal
     var count: Int = 0
+    
     @State var i: Int = 0
     
     var body: some View {
@@ -19,6 +20,7 @@ struct PrimaryCardView: View {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color("PrimaryCardColor"))
                 .frame(height: 210)
+            
             HStack{
                 VStack (alignment: .leading){
                     Text("Your main goal:")
@@ -47,6 +49,7 @@ struct PrimaryCardView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundColor(Color("StartButtonMainColor"))
                                 .frame(width: 75, height: 30)
+                                
                             Button("START") {
                                 
                             }

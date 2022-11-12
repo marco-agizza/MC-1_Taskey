@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selection: String? = nil
-    @State private var showingSheet = false
+    @State private var showingGoalCreationSheet = false
+    @State private var showingGoalDetailsSheet : Goal? = nil
     
     @ObservedObject var goalVM = GoalViewModel()
     
@@ -22,14 +23,17 @@ struct MainView: View {
                 List {
                     ForEach(goalVM.goals) { currGoal in
                         GoalCardView(currGoal: currGoal)
-                            .background(
+                            .onTapGesture {
+                                self.showingGoalDetailsSheet = currGoal
+                            }
+                            /*.background(
                                 NavigationLink(
                                     destination: GoalDetailsView(goal: currGoal),
                                     label:{}
                                 )
                                 .opacity(0.0)
                                 .buttonStyle(PlainButtonStyle())
-                            )
+                            )*/
                         //                            .onDrag({
                         //                                self.draggedItem = currGoal
                         //                                return NSItemProvider(item: nil, typeIdentifier: currGoal)
@@ -39,6 +43,9 @@ struct MainView: View {
                     .onMove(perform: move)
                 }
                 .listStyle(.plain)
+                .sheet(item: self.$showingGoalDetailsSheet) { goal in
+                    GoalDetailsView(goal: goal)
+                }
 //                .padding(0.0)
 //                .background(.opacity(0.0))
 //                .animation(.easeInOut, value: currGoal)
@@ -49,12 +56,12 @@ struct MainView: View {
                 trailing:
                     Button {
                     print("add a new goal pressed")
-                    showingSheet.toggle()
+                    showingGoalCreationSheet.toggle()
                 } label: {
-                    Label("Add goal", systemImage: "plus.app.fill")
+                    Label("Add goal", systemImage: "plus.app.fill").font(.system(size: 22))
                 }
                 .foregroundColor(.blue)
-                .sheet(isPresented: $showingSheet, content: {
+                .sheet(isPresented: $showingGoalCreationSheet, content: {
                         GoalCreationView(goalTitle: "", goalDescription: "", currTaskTitle: "", goalVM: goalVM)
                     }
                 )
