@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		34531BD8290ABE3A0021CDAE /* GoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34531BD7290ABE3A0021CDAE /* GoalCardView.swift */; };
+		346830A829216843007D3E16 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830A729216843007D3E16 /* FocusTimerView.swift */; };
+		346830AA2921687E007D3E16 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830A92921687E007D3E16 /* RoundButton.swift */; };
+		346830AC292168B2007D3E16 /* TextRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830AB292168B2007D3E16 /* TextRectangleButton.swift */; };
 		3482C3E72901AADC0031B624 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C3E62901AADC0031B624 /* Goal.swift */; };
 		3482C3E92902B2220031B624 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C3E82902B2220031B624 /* Task.swift */; };
 		34DD07012902F205004A0295 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DD07002902F205004A0295 /* GoalListView.swift */; };
@@ -27,6 +30,9 @@
 
 /* Begin PBXFileReference section */
 		34531BD7290ABE3A0021CDAE /* GoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView.swift; sourceTree = "<group>"; };
+		346830A729216843007D3E16 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
+		346830A92921687E007D3E16 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		346830AB292168B2007D3E16 /* TextRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRectangleButton.swift; sourceTree = "<group>"; };
 		3482C3E62901AADC0031B624 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		3482C3E82902B2220031B624 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		34DD07002902F205004A0295 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
@@ -114,6 +120,9 @@
 				52ECD54A29095ACD00D14312 /* PrimaryCardView.swift */,
 				520D857C290AB17400782A97 /* GoalDetailsView.swift */,
 				34531BD7290ABE3A0021CDAE /* GoalCardView.swift */,
+				346830A729216843007D3E16 /* FocusTimerView.swift */,
+				346830A92921687E007D3E16 /* RoundButton.swift */,
+				346830AB292168B2007D3E16 /* TextRectangleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,10 +206,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				346830AA2921687E007D3E16 /* RoundButton.swift in Sources */,
 				5230447D29008D3100B0BD3A /* GoalCreationView.swift in Sources */,
 				5230447F29008E3C00B0BD3A /* MainView.swift in Sources */,
 				52E9669F29083A4300E76016 /* GoalViewModel.swift in Sources */,
 				3482C3E72901AADC0031B624 /* Goal.swift in Sources */,
+				346830A829216843007D3E16 /* FocusTimerView.swift in Sources */,
 				34DD07012902F205004A0295 /* GoalListView.swift in Sources */,
 				52ECD54B29095ACD00D14312 /* PrimaryCardView.swift in Sources */,
 				3482C3E92902B2220031B624 /* Task.swift in Sources */,
@@ -210,6 +221,7 @@
 				52E966A129083A4D00E76016 /* TaskViewModel.swift in Sources */,
 				52E9669C2906D4C800E76016 /* FocusModeView.swift in Sources */,
 				5230446D290058C500B0BD3A /* MC1_TaskeyApp.swift in Sources */,
+				346830AC292168B2007D3E16 /* TextRectangleButton.swift in Sources */,
 				52ECD54929095ABF00D14312 /* SecondaryCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
