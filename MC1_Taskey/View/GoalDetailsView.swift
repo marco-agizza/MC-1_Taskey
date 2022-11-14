@@ -121,6 +121,29 @@ struct GoalDetailsView: View {
                         .listRowBackground(Color.gray.opacity(0.0))
                         .listRowSeparator(.hidden)
                         .padding(.top, -3)
+                    }
+                VStack {
+                    Spacer(minLength: 560)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 18)
+                            .foregroundColor(Color("PrimaryAccentColor"))
+                            .ignoresSafeArea()
+                        HStack {
+                            Spacer()
+                            ZStack{
+                                Capsule()
+                                    .foregroundColor(Color("StartButtonMainColor"))
+                                    .frame(width: 116, height: 60)
+                                    .padding()
+                                
+                                Button("START") {
+                                    
+                                }
+                                .bold()
+                                .foregroundColor(.white)
+                            }
+                        }
+                    }
                 }
             }
             .navigationTitle(goal.title)
@@ -172,6 +195,12 @@ struct GoalDetailsView: View {
         
     }
 }
+
+//struct GoalStartButtonView: View {
+//    var body: some View {
+//
+//    }
+//}
 
 struct TaskDetailsView_Previews: PreviewProvider {
     static var previews: some View {
