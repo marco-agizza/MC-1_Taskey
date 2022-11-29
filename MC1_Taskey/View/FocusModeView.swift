@@ -10,7 +10,7 @@ import Combine
 
 struct FocusModeView: View {
     
-    @ObservedObject private var vm: FocusModeVM = FocusModeVM(focusTime: 2701, restTime: 900.9)
+    @ObservedObject private var vm: FocusModeVM = FocusModeVM(focusTime: 45*60+1, restTime: 900.9)
     // Buttons
     
     
