@@ -39,7 +39,6 @@ struct CheckBoxView: View {
                 }
                 .padding(.leading, 4)
                 .padding(/*@START_MENU_TOKEN@*/.bottom, -10.0/*@END_MENU_TOKEN@*/)
-                
                 Spacer()
             }
         }
@@ -178,7 +177,7 @@ struct GoalDetailsView: View {
     
     func addTaskToTheList(){
         guard currTaskTitle.count > 0 else { return }
-        //taskVM.addTask(newTaskTitle: currTaskTitle)
+        goal.addTask(taskTitle: currTaskTitle)
         currTaskTitle = ""
         
     }
