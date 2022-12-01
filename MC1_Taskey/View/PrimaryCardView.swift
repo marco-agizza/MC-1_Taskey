@@ -16,6 +16,7 @@ struct PrimaryCardView: View {
     @State var i: Int = 0
     
     var body: some View {
+        
         ZStack {
             //Color("BackgroundColor").ignoresSafeArea()
             RoundedRectangle(cornerRadius: 20)

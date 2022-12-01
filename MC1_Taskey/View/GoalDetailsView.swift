@@ -125,9 +125,9 @@ struct GoalDetailsView: View {
                         .listRowBackground(Color.gray.opacity(0.0))
                         .listRowSeparator(.hidden)
                         .padding(.top, -3)
-                    }
+                }
                 VStack {
-                    Spacer(minLength: 560)
+                    Spacer(minLength: 620)
                     ZStack {
                         RoundedRectangle(cornerRadius: 18)
                             .foregroundColor(Color("PrimaryAccentColor"))
@@ -138,14 +138,16 @@ struct GoalDetailsView: View {
                                 Capsule()
                                     .foregroundColor(Color("StartButtonMainColor"))
                                     .frame(width: 116, height: 60)
-                                    .padding()
+
                                 
                                 Button("START") {
                                     
                                 }
                                 .bold()
                                 .foregroundColor(.white)
+                                
                             }
+                            .padding(.trailing, 15)
                         }
                     }
                 }
