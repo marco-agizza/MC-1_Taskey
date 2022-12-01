@@ -11,6 +11,8 @@ import Combine
 struct FocusModeView: View {
     
     @ObservedObject private var vm: FocusModeVM = FocusModeVM(focusTime: 45*60+1, restTime: 900.9)
+    
+    var currentGoal: Goal
     // Buttons
     
     
@@ -87,6 +89,7 @@ struct FocusModeView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -183,6 +186,6 @@ private extension FocusModeView {
     
 struct focusView_Previews: PreviewProvider {
     static var previews: some View {
-        FocusModeView()
+        FocusModeView(currentGoal: goalData[0])
     }
 }

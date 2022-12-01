@@ -127,27 +127,24 @@ struct GoalDetailsView: View {
                         .padding(.top, -3)
                 }
                 VStack {
-                    Spacer(minLength: 620)
+                    Spacer(minLength: 590)
                     ZStack {
-                        RoundedRectangle(cornerRadius: 18)
+                        RoundedRectangle(cornerRadius: 25)
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .ignoresSafeArea()
                         HStack {
                             Spacer()
-                            ZStack{
-                                Capsule()
-                                    .foregroundColor(Color("StartButtonMainColor"))
-                                    .frame(width: 116, height: 60)
-
-                                
-                                Button("START") {
-                                    
+                            NavigationLink(destination: FocusModeView(currentGoal: goal), label: {
+                                ZStack{
+                                    Capsule()
+                                        .foregroundColor(Color("StartButtonMainColor"))
+                                        .frame(width: 116, height: 60)
+                                    Text("START")
+                                    .bold()
+                                    .foregroundColor(.white)
                                 }
-                                .bold()
-                                .foregroundColor(.white)
-                                
-                            }
-                            .padding(.trailing, 15)
+                            })
+                            .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 15))
                         }
                     }
                 }
@@ -189,10 +186,10 @@ struct GoalDetailsView: View {
 //
 //    }
 //}
-/*
+
 struct TaskDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalDetailsView(goal: goalData[0])
+        GoalDetailsView(goalVM: GoalViewModel(), goal: goalData[0])
     }
 }
- */
+
