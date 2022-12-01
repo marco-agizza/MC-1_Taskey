@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct CheckBoxView: View {
-    @State var task : Task
+    @Binding var task : Task
     @Binding var mode : EditMode
     var body: some View {
         VStack{
             HStack{
-                mode == .inactive ? Image(systemName: task.doneStatus ? "checkmark.circle" : "circle").font(.system(size: 20))
+                mode == .inactive ? Image(systemName: task.doneStatus ? "checkmark.circle" : "circle")
+                    .font(.system(size: 20))
                     .foregroundColor(task.doneStatus ? Color(UIColor.white) : Color.secondary)
                     .onTapGesture {
                         task.doneStatus.toggle()
@@ -24,7 +25,6 @@ struct CheckBoxView: View {
             }
             HStack{
                 VStack{
-                    
                     /*
                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
                         .resizable()
@@ -47,7 +47,7 @@ struct CheckBoxView: View {
 }
 
 struct CheckBoxViewList: View {
-    @State var goal : Goal
+    @Binding var goal : Goal
     @Binding var mode : EditMode
     @Binding var currTaskTitle : String
     
@@ -55,7 +55,7 @@ struct CheckBoxViewList: View {
         ZStack {
             goal.isPrimary ? Color("PrimaryCardColor").ignoresSafeArea() : Color("SecondaryCardColor").ignoresSafeArea()
             List {
-                ForEach(goal.taskList) { task in
+                ForEach($goal.taskList) { task in
                     CheckBoxView(task: task, mode: $mode)
                 }
                 .onDelete(perform: delete)
@@ -82,15 +82,19 @@ struct CheckBoxViewList: View {
     }
     
     func move(from source: IndexSet, to destination: Int){
-        let revesedSource = source.sorted()
-        for index in revesedSource.reversed(){
-            goal.taskList.insert(goal.taskList.remove(at: index), at: destination)
+        if destination < self.goal.taskList.count {
+            let revesedSource = source.sorted()
+            print("moving task from \(revesedSource) to \(destination)")
+            for index in revesedSource.reversed() {
+                goal.taskList.insert(goal.taskList.remove(at: index), at: destination)
+            }
         }
     }
 }
 
 struct GoalDetailsView: View {
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var goalVM : GoalViewModel
     @State var goal : Goal
     @State fileprivate var isEditing : Bool = false
     @State var mode : EditMode = .inactive
@@ -117,7 +121,7 @@ struct GoalDetailsView: View {
                     .padding(.bottom, 10.0)
                     
                     
-                    CheckBoxViewList(goal: goal, mode: $mode, currTaskTitle: $currTaskTitle)
+                    CheckBoxViewList(goal: $goal, mode: $mode, currTaskTitle: $currTaskTitle)
                         .listRowBackground(Color.gray.opacity(0.0))
                         .listRowSeparator(.hidden)
                         .padding(.top, -3)
@@ -159,31 +163,13 @@ struct GoalDetailsView: View {
                     .background(.white)
                     .foregroundColor(goal.isPrimary ? Color("PrimaryCardColor") : Color("SecondaryCardColor"))
                     .cornerRadius(33)
-                    /*Button() {
-                    isEditing.toggle()
-                } label: {
-                    //Label("Edit goal", systemImage: "pencil.circle.fill").font(.system(size: 22))
-                    isEditing ?
-                    Text("Done")
-                        .fontWeight(.semibold)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 3.6)
-                        .background(.white)
-                        .foregroundColor(goal.isPrimary ? Color("PrimaryCardColor") : Color("SecondaryCardColor"))
-                        .cornerRadius(33):
-                    Text("Edit")
-                        .fontWeight(.semibold)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 3.6)
-                        .background(.white)
-                        .foregroundColor(goal.isPrimary ? Color("PrimaryCardColor") : Color("SecondaryCardColor"))
-                        .cornerRadius(33)
-                    
-                }.foregroundColor(.white)*/
             )
             .environment(\.editMode, $mode)
             .onSubmit {
                 addTaskToTheList()
+            }
+            .onDisappear {
+                goalVM.goals[goalVM.selectedGoal] = goal
             }
         }
     }
@@ -201,9 +187,10 @@ struct GoalDetailsView: View {
 //
 //    }
 //}
-
+/*
 struct TaskDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         GoalDetailsView(goal: goalData[0])
     }
 }
+ */

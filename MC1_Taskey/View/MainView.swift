@@ -11,47 +11,27 @@ import SwiftUI
 struct MainView: View {
     @State private var selection: String? = nil
     @State private var showingGoalCreationSheet = false
-    @State private var showingGoalDetailsSheet : Goal? = nil
+    @State private var showingGoalDetailsSheet : Bool = false
     
-    @ObservedObject var goalVM = GoalViewModel()
-    
-//    func move(from source: IndexSet, to destination: Int) {
-//        tasks.move(fromOffsets: source, toOffset: destination )
-//    }
+    @StateObject var goalVM = GoalViewModel()
     
     var body: some View {
         NavigationView {
                 List {
-                    ForEach(goalVM.goals) { currGoal in
-                        GoalCardView(currGoal: currGoal)
+                    ForEach(0..<goalVM.goals.count) { index in
+                        GoalCardView(currGoal: goalVM.goals[index])
                             .onTapGesture {
-                                self.showingGoalDetailsSheet = currGoal
+                                goalVM.selectedGoal = index
+                                showingGoalDetailsSheet.toggle()
                             }
-                            /*.background(
-                                NavigationLink(
-                                    destination: GoalDetailsView(goal: currGoal),
-                                    label:{}
-                                )
-                                .opacity(0.0)
-                                .buttonStyle(PlainButtonStyle())
-                            )*/
-                        //                            .onDrag({
-                        //                                self.draggedItem = currGoal
-                        //                                return NSItemProvider(item: nil, typeIdentifier: currGoal)
-                        //                            })
                     }
                     .onDelete(perform: goalVM.remove)
                     .onMove(perform: move)
                 }
                 .listStyle(.plain)
-                .sheet(item: self.$showingGoalDetailsSheet) { goal in
-                    GoalDetailsView(goal: goal)
+                .sheet(isPresented: $showingGoalDetailsSheet) {
+                    GoalDetailsView(goalVM: goalVM, goal: goalVM.goals[goalVM.selectedGoal])
                 }
-//                .padding(0.0)
-//                .background(.opacity(0.0))
-//                .animation(.easeInOut, value: currGoal)
-//            .scrollContentBackground(.hidden)
-            
             .navigationBarTitle("Your goals")
             .navigationBarItems(
                 trailing:
@@ -66,11 +46,6 @@ struct MainView: View {
                         GoalCreationView(goalTitle: "", goalDescription: "", currTaskTitle: "", goalVM: goalVM)
                     }
                 )
-                
-                /*NavigationLink(
-                    destination: GoalCreationView(goal_title: "", description: ""),
-                    label: {Text("Add")}
-                )*/
             )
         }
     }

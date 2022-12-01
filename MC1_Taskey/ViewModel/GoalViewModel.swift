@@ -11,6 +11,7 @@ import Foundation
 // we are saying that this class is seen by everyone in the project
 class GoalViewModel: ObservableObject {
     @Published var goals : [Goal] = []
+    @Published var selectedGoal : Int = 0
     
     init() {
         goals = goalData

@@ -16,20 +16,8 @@ struct GoalCardView: View {
     var body: some View {
         if (currGoal.isPrimary == true) {
             PrimaryCardView(goal: currGoal)
-                .sheet(
-                    isPresented: $showingGoalDetailsSheet,
-                    content: {
-                        GoalDetailsView(goal: currGoal)
-                    }
-                )
         } else {
             SecondaryCardView(goal: currGoal)
-                .sheet(
-                    isPresented: $showingGoalDetailsSheet,
-                    content: {
-                        GoalDetailsView(goal: currGoal)
-                    }
-                )
         }
     }
     
