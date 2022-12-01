@@ -126,7 +126,7 @@ struct GoalDetailsView: View {
                         .padding(.top, -3)
                 }
                 VStack {
-                    Spacer(minLength: 590)
+                    Spacer(minLength: 580)
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
                             .foregroundColor(Color("PrimaryAccentColor"))
