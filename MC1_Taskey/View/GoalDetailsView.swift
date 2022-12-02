@@ -99,6 +99,7 @@ struct GoalDetailsView: View {
     @State fileprivate var isEditing : Bool = false
     @State var mode : EditMode = .inactive
     @State var currTaskTitle : String = String()
+    @State var isFocusMode: Bool = false
     
     var body: some View {
         NavigationView {
@@ -135,17 +136,32 @@ struct GoalDetailsView: View {
                             .ignoresSafeArea()
                         HStack {
                             Spacer()
-                            NavigationLink(destination: FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal]), label: {
+                            Button {
+                                isFocusMode.toggle()
+                            } label: {
                                 ZStack{
                                     Capsule()
                                         .foregroundColor(Color("StartButtonMainColor"))
                                         .frame(width: 116, height: 60)
                                     Text("START")
-                                    .bold()
-                                    .foregroundColor(.white)
+                                        .bold()
+                                        .foregroundColor(.white)
                                 }
-                            })
+                            }
+//                            NavigationLink(destination: FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal]), label: {
+//                                ZStack{
+//                                    Capsule()
+//                                        .foregroundColor(Color("StartButtonMainColor"))
+//                                        .frame(width: 116, height: 60)
+//                                    Text("START")
+//                                    .bold()
+//                                    .foregroundColor(.white)
+//                                }
+//                            })
                             .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 15))
+                            .fullScreenCover(isPresented: $isFocusMode) {
+                                FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal])
+                            }
                         }
                     }
                 }

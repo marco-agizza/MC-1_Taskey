@@ -14,7 +14,7 @@ struct FocusTaskView: View {
     
     init(currentGoal: Goal) {
         self.currentGoal = currentGoal
-        self.currentTask = currentGoal.taskList[findCurrentTaskIndex(currentGoal: currentGoal)]
+        self.currentTask = findCurrentTask(currentGoal: currentGoal) ?? nil
     }
     
     var body: some View {
@@ -23,6 +23,11 @@ struct FocusTaskView: View {
             .bold()
             .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
     }
+}
+
+func findCurrentTask(currentGoal: Goal) -> Task? {
+    return currentGoal.taskList.first { $0.doneStatus == false }
+    ?? nil
 }
 
 //struct TaskFocusView_Previews: PreviewProvider {

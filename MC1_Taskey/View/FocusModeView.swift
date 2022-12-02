@@ -12,6 +12,8 @@ struct FocusModeView: View {
     
     @ObservedObject private var FocusModeViewModel: FocusModeVM = FocusModeVM(focusTime: 45*60+1, restTime: 900.9)
     
+    @Environment(\.dismiss) var dismiss
+    
     @Binding var currentGoal: Goal
     
 //    @State private var currentTask: Task?
@@ -42,16 +44,22 @@ struct FocusModeView: View {
                             buttonColor: "FocusedButtonColor",
                             buttonText: "COMPLETE",
                             onTap: {
-                                if findCurrentTaskIndex(currentGoal: currentGoal) >= 0 {
-                                    currentGoal.taskList[findCurrentTaskIndex(currentGoal: currentGoal)].doneStatus = true
-                                } else {
-                                        
+//                                Find next incomplete task, complete if there is more than one incomplete task – complete it, if there is only one left – complete it and dismiss FocusModeView
+                                if let currentTaskIndex = findCurrentTaskIndex(currentGoal: currentGoal) {
+                                    if currentGoal.taskList.filter({ $0.doneStatus == false }).count > 1 {
+                                        currentGoal.taskList[currentTaskIndex].doneStatus = true
+                                        print(currentGoal.taskList.filter({ $0.doneStatus == true }))
+                                    } else {
+                                        currentGoal.taskList[currentTaskIndex].doneStatus = true
+                                        dismiss()
+                                        print(currentGoal.taskList.filter({ $0.doneStatus == true }))
                                     }
+                                }
                             }
                         )
                     }
                 }
-                .padding()
+                .padding(EdgeInsets(top: 0, leading: 50, bottom: 0, trailing: 50))
                                 
             case .paused:
                 Color("PausedBackgroundColor").ignoresSafeArea()
@@ -178,12 +186,11 @@ private extension FocusModeView {
     }
 }
 
-//    The current task is the first one in the array which is not done. Return -1 if all the tasks are completed, to return to main screen.
-func findCurrentTaskIndex(currentGoal: Goal) -> Int {
-    return currentGoal.taskList.firstIndex { $0.doneStatus == false }
-    ?? -1
+//    The current task is the first one in the array which is not done.
+func findCurrentTaskIndex(currentGoal: Goal) -> Int? {
+    print(currentGoal.taskList.firstIndex { $0.doneStatus == false } ?? nil)
+    return currentGoal.taskList.firstIndex { $0.doneStatus == false } ?? nil
 }
-
     
     // MARK: - Preview
     
