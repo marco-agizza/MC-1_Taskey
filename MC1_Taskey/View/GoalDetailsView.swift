@@ -11,7 +11,7 @@ import SwiftUI
 struct CheckBoxView: View {
     @Binding var task : Task
     @Binding var mode : EditMode
-
+    
     var body: some View {
         VStack{
             HStack{
@@ -143,8 +143,8 @@ struct GoalDetailsView: View {
                                         .foregroundColor(Color("StartButtonMainColor"))
                                         .frame(width: 116, height: 60)
                                     Text("START")
-                                    .bold()
-                                    .foregroundColor(.white)
+                                        .bold()
+                                        .foregroundColor(.white)
                                 }
                             })
                             .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 15))
@@ -189,10 +189,10 @@ struct GoalDetailsView: View {
 //
 //    }
 //}
-/*
- struct TaskDetailsView_Previews: PreviewProvider {
- static var previews: some View {
- GoalDetailsView(goal: goalData[0])
- }
- }
- */
+
+struct TaskDetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        GoalDetailsView(goalVM: GoalViewModel(), goal: goalData[0])
+    }
+}
+
