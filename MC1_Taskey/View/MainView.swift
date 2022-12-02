@@ -17,54 +17,54 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-                List {
-                    ForEach(0..<goalVM.goals.count) { index in
-                        GoalCardView(currGoal: goalVM.goals[index])
-                            .onTapGesture {
-                                goalVM.selectedGoal = index
-                                showingGoalDetailsSheet.toggle()
-                            }
-                    }
-                    .onDelete(perform: goalVM.remove)
-                    .onMove(perform: move)
+            List {
+                ForEach(0..<goalVM.goals.count, id: \.self) { index in
+                    GoalCardView(currGoal: goalVM.goals[index])
+                        .onTapGesture {
+                            goalVM.selectedGoal = index
+                            showingGoalDetailsSheet.toggle()
+                        }
                 }
-                .listStyle(.plain)
-                .sheet(isPresented: $showingGoalDetailsSheet) {
-                    GoalDetailsView(goalVM: goalVM, goal: goalVM.goals[goalVM.selectedGoal])
-                }
+                .onDelete(perform: goalVM.remove)
+                .onMove(perform: move)
+            }
+            .listStyle(.plain)
+            .sheet(isPresented: $showingGoalDetailsSheet) {
+                GoalDetailsView(goalVM: goalVM, goal: goalVM.goals[goalVM.selectedGoal])
+            }
             .navigationBarTitle("Your goals")
             .navigationBarItems(
                 trailing:
                     Button {
-                    print("add a new goal pressed")
-                    showingGoalCreationSheet.toggle()
-                } label: {
-                    Label("Add goal", systemImage: "plus.app.fill").font(.system(size: 22))
-                }
-                .foregroundColor(.blue)
-                .sheet(isPresented: $showingGoalCreationSheet, content: {
+                        print("add a new goal pressed")
+                        showingGoalCreationSheet.toggle()
+                    } label: {
+                        Label("Add goal", systemImage: "plus.app.fill").font(.system(size: 22))
+                    }
+                    .foregroundColor(.blue)
+                    .sheet(isPresented: $showingGoalCreationSheet, content: {
                         GoalCreationView(goalTitle: "", goalDescription: "", currTaskTitle: "", goalVM: goalVM)
                     }
-                )
+                          )
             )
         }
     }
     
- 
+    
     // TODO Current implementation violates single responsibility principle
     func move(from source: IndexSet, to destination: Int) {
-            goalVM.goals.move(fromOffsets: source, toOffset: destination )
-            goalVM.goals[0].isPrimary = true
-            for index in goalVM.goals[1...].indices {
-                goalVM.goals[index].lowerPriority()
-            }
+        goalVM.goals.move(fromOffsets: source, toOffset: destination )
+        goalVM.goals[0].isPrimary = true
+        for index in goalVM.goals[1...].indices {
+            goalVM.goals[index].lowerPriority()
+        }
     }
-//
-//    func resetPriority() {
-//            goalVM.goals[0].isPrimary = true
-//            for index in goalVM.goals[1...].indices {
-//                goalVM.goals[index].lowerPriority()
-//            }
+    //
+    //    func resetPriority() {
+    //            goalVM.goals[0].isPrimary = true
+    //            for index in goalVM.goals[1...].indices {
+    //                goalVM.goals[index].lowerPriority()
+    //            }
 }
 
 struct MainView_Previews: PreviewProvider {
