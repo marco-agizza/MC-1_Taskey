@@ -13,6 +13,7 @@
 		346830AC292168B2007D3E16 /* TextRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830AB292168B2007D3E16 /* TextRectangleButton.swift */; };
 		3482C3E72901AADC0031B624 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C3E62901AADC0031B624 /* Goal.swift */; };
 		3482C3E92902B2220031B624 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C3E82902B2220031B624 /* Task.swift */; };
+		34D4EB78293914BE00FDF00A /* FocusTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D4EB77293914BE00FDF00A /* FocusTaskView.swift */; };
 		34DD07012902F205004A0295 /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DD07002902F205004A0295 /* GoalListView.swift */; };
 		520D857D290AB17400782A97 /* GoalDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520D857C290AB17400782A97 /* GoalDetailsView.swift */; };
 		5230446D290058C500B0BD3A /* MC1_TaskeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5230446C290058C500B0BD3A /* MC1_TaskeyApp.swift */; };
@@ -35,6 +36,7 @@
 		346830AB292168B2007D3E16 /* TextRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRectangleButton.swift; sourceTree = "<group>"; };
 		3482C3E62901AADC0031B624 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		3482C3E82902B2220031B624 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		34D4EB77293914BE00FDF00A /* FocusTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTaskView.swift; sourceTree = "<group>"; };
 		34DD07002902F205004A0295 /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
 		520D857C290AB17400782A97 /* GoalDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailsView.swift; sourceTree = "<group>"; };
 		52304469290058C500B0BD3A /* Taskey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taskey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 				346830A729216843007D3E16 /* FocusTimerView.swift */,
 				346830A92921687E007D3E16 /* RoundButton.swift */,
 				346830AB292168B2007D3E16 /* TextRectangleButton.swift */,
+				34D4EB77293914BE00FDF00A /* FocusTaskView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				52E9669A2906C43200E76016 /* Database.swift in Sources */,
 				520D857D290AB17400782A97 /* GoalDetailsView.swift in Sources */,
 				34531BD8290ABE3A0021CDAE /* GoalCardView.swift in Sources */,
+				34D4EB78293914BE00FDF00A /* FocusTaskView.swift in Sources */,
 				52E966A129083A4D00E76016 /* TaskViewModel.swift in Sources */,
 				52E9669C2906D4C800E76016 /* FocusModeView.swift in Sources */,
 				5230446D290058C500B0BD3A /* MC1_TaskeyApp.swift in Sources */,
@@ -351,7 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC1_Taskey/Preview Content\"";
-				DEVELOPMENT_TEAM = F639597UZK;
+				DEVELOPMENT_TEAM = B2849SAXBK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

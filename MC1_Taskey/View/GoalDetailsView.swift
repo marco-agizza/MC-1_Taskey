@@ -11,6 +11,7 @@ import SwiftUI
 struct CheckBoxView: View {
     @Binding var task : Task
     @Binding var mode : EditMode
+
     var body: some View {
         VStack{
             HStack{
@@ -98,6 +99,7 @@ struct GoalDetailsView: View {
     @State fileprivate var isEditing : Bool = false
     @State var mode : EditMode = .inactive
     @State var currTaskTitle : String = String()
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -133,7 +135,7 @@ struct GoalDetailsView: View {
                             .ignoresSafeArea()
                         HStack {
                             Spacer()
-                            NavigationLink(destination: FocusModeView(currentGoal: goal), label: {
+                            NavigationLink(destination: FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal]), label: {
                                 ZStack{
                                     Capsule()
                                         .foregroundColor(Color("StartButtonMainColor"))

@@ -10,20 +10,23 @@ import Combine
 
 struct FocusModeView: View {
     
-    @ObservedObject private var vm: FocusModeVM = FocusModeVM(focusTime: 45*60+1, restTime: 900.9)
+    @ObservedObject private var FocusModeViewModel: FocusModeVM = FocusModeVM(focusTime: 45*60+1, restTime: 900.9)
     
-    var currentGoal: Goal
-    // Buttons
+    @Binding var currentGoal: Goal
     
+//    @State private var currentTask: Task?
+    
+//        self.currentTask = findCurrentTask(currentGoal: currentGoal)
     
     var body: some View {
         ZStack{
-            switch vm.screenState {
+            switch FocusModeViewModel.screenState {
             case .focused:
                 Color("FocusedBackgroundColor").ignoresSafeArea()
-                VStack {
+                VStack (alignment: .leading) {
+                    FocusTaskView(currentGoal: currentGoal)
                     Spacer()
-                    FocusTimerView(timeToSwitch: vm.timeRemaining)
+                    FocusTimerView(timeToSwitch: FocusModeViewModel.timeRemaining)
                     Spacer()
                     HStack(spacing: 30) {
                         
@@ -31,31 +34,39 @@ struct FocusModeView: View {
                             buttonColor: "FocusedButtonColor",
                             buttonSymbol: "pause.fill",
                             onTap: {
-                                vm.screenState = .paused
-                                vm.pauseQueue()
+                                FocusModeViewModel.screenState = .paused
+                                FocusModeViewModel.pauseQueue()
                             }
                         )
                         TextRectangleButton(
                             buttonColor: "FocusedButtonColor",
                             buttonText: "COMPLETE",
-                            onTap: { print("task Completed") }
+                            onTap: {
+                                if findCurrentTaskIndex(currentGoal: currentGoal) >= 0 {
+                                    currentGoal.taskList[findCurrentTaskIndex(currentGoal: currentGoal)].doneStatus = true
+                                } else {
+                                        
+                                    }
+                            }
                         )
                     }
                 }
+                .padding()
                                 
             case .paused:
                 Color("PausedBackgroundColor").ignoresSafeArea()
-                VStack {
+                VStack (alignment: .leading) {
+                    FocusTaskView(currentGoal: currentGoal)
                     Spacer()
-                    FocusTimerView(timeToSwitch: vm.timeRemaining)
+                    FocusTimerView(timeToSwitch: FocusModeViewModel.timeRemaining)
                     Spacer()
                     HStack(spacing: 30) {
                         RoundButton(
                             buttonColor: "FocusedButtonColor",
                             buttonSymbol: "play.fill",
                             onTap: {
-                                vm.resumeQueue()
-                                vm.screenState = .focused
+                                FocusModeViewModel.resumeQueue()
+                                FocusModeViewModel.screenState = .focused
                             }
                         )
                         TextRectangleButton(
@@ -65,12 +76,14 @@ struct FocusModeView: View {
                         )
                     }
                 }
+                .padding()
                         
             case .resting:
                 Color("RestingBackgroundColor").ignoresSafeArea()
-                VStack {
+                VStack (alignment: .leading) {
+                    FocusTaskView(currentGoal: currentGoal)
                     Spacer()
-                    FocusTimerView(timeToSwitch: vm.timeRemaining)
+                    FocusTimerView(timeToSwitch: FocusModeViewModel.timeRemaining)
                     Spacer()
                     HStack(spacing: 30) {
                         RoundButton(
@@ -82,11 +95,12 @@ struct FocusModeView: View {
                             buttonColor: "RestingButtonColor",
                             buttonText: "CONTINUE",
                             onTap: {
-                                vm.screenState = .focused
-                                vm.timeRemaining = vm.focusTime
+                                FocusModeViewModel.screenState = .focused
+                                FocusModeViewModel.timeRemaining = FocusModeViewModel.focusTime
                             })
                     }
                 }
+                .padding()
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -164,28 +178,17 @@ private extension FocusModeView {
     }
 }
 
-private extension FocusModeView {
-    struct RoundButtonStyle: ButtonStyle {
-        
-//        var roundButtonSymbols = [pause.fill, play.fill, stop.fill]
-        
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-//                .symbolVariant(<#T##variant: SymbolVariants##SymbolVariants#>)
-                .font(.title.bold())
-            
-        }
-    }
-    
-    struct TextButtonStyle {
-        
-    }
+//    The current task is the first one in the array which is not done. Return -1 if all the tasks are completed, to return to main screen.
+func findCurrentTaskIndex(currentGoal: Goal) -> Int {
+    return currentGoal.taskList.firstIndex { $0.doneStatus == false }
+    ?? -1
 }
+
     
     // MARK: - Preview
     
 struct focusView_Previews: PreviewProvider {
     static var previews: some View {
-        FocusModeView(currentGoal: goalData[0])
+        FocusModeView(currentGoal: .constant (goalData[0]))
     }
 }
