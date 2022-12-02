@@ -30,3 +30,4 @@ var goalData = [
     Goal(title: "Get in shape", description: "", taskList: taskData1, isPrimary: false),
     Goal(title: "Become more confident", description: "Description sample", taskList: taskData2, isPrimary: false)
 ]
+

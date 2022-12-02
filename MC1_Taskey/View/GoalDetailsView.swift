@@ -11,6 +11,7 @@ import SwiftUI
 struct CheckBoxView: View {
     @Binding var task : Task
     @Binding var mode : EditMode
+
     var body: some View {
         VStack{
             HStack{
@@ -100,6 +101,7 @@ struct GoalDetailsView: View {
     @State fileprivate var isEditing : Bool = false
     @State var mode : EditMode = .inactive
     @State var currTaskTitle : String = String()
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -128,27 +130,24 @@ struct GoalDetailsView: View {
                         .padding(.top, -3)
                 }
                 VStack {
-                    Spacer(minLength: 620)
+                    Spacer(minLength: 580)
                     ZStack {
-                        RoundedRectangle(cornerRadius: 18)
+                        RoundedRectangle(cornerRadius: 25)
                             .foregroundColor(Color("PrimaryAccentColor"))
                             .ignoresSafeArea()
                         HStack {
                             Spacer()
-                            ZStack{
-                                Capsule()
-                                    .foregroundColor(Color("StartButtonMainColor"))
-                                    .frame(width: 116, height: 60)
-                                
-                                
-                                Button("START") {
-                                    
+                            NavigationLink(destination: FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal]), label: {
+                                ZStack{
+                                    Capsule()
+                                        .foregroundColor(Color("StartButtonMainColor"))
+                                        .frame(width: 116, height: 60)
+                                    Text("START")
+                                    .bold()
+                                    .foregroundColor(.white)
                                 }
-                                .bold()
-                                .foregroundColor(.white)
-                                
-                            }
-                            .padding(.trailing, 15)
+                            })
+                            .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 15))
                         }
                     }
                 }

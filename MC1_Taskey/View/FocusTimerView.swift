@@ -13,7 +13,6 @@ struct FocusTimerView: View {
     
     var body: some View {
                 Text(convertSecondToTime(timeInSeconds: timeToSwitch))
-                    .padding()
                     .font(.system(size: 100))
                     .bold()
         }
