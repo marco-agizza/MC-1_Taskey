@@ -11,7 +11,7 @@ import SwiftUI
 struct CheckBoxView: View {
     @Binding var task : Task
     @Binding var mode : EditMode
-
+    
     var body: some View {
         VStack{
             HStack{
@@ -27,15 +27,15 @@ struct CheckBoxView: View {
             HStack{
                 VStack{
                     /*
-                    Image(systemName: task.doneStatus ? "circle.fill" : "circle")
-                        .resizable()
-                        .frame(width: 10.0, height: 10.0)
-                    Image(systemName: task.doneStatus ? "circle.fill" : "circle")
-                        .resizable()
-                        .frame(width: 10.0, height: 10.0)
-                    Image(systemName: task.doneStatus ? "circle.fill" : "circle")
-                        .resizable()
-                        .frame(width: 10.0, height: 10.0)
+                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
+                     .resizable()
+                     .frame(width: 10.0, height: 10.0)
+                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
+                     .resizable()
+                     .frame(width: 10.0, height: 10.0)
+                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
+                     .resizable()
+                     .frame(width: 10.0, height: 10.0)
                      */
                 }
                 .padding(.leading, 4)
@@ -58,7 +58,7 @@ struct CheckBoxViewList: View {
                 ForEach($goal.taskList) { task in
                     CheckBoxView(task: task, mode: $mode)
                 }
-                .onDelete(perform: delete)
+                .onDelete(perform: goal.taskList.count > 1 ? delete : nil)
                 .onMove(perform: move)
                 .listRowBackground(Color.gray.opacity(0.0))
                 .listRowSeparator(.hidden)
@@ -76,8 +76,10 @@ struct CheckBoxViewList: View {
     
     //TODO change delete and move using the ViewModel!
     func delete(at offset: IndexSet){
-        if let first = offset.first{
-            goal.taskList.remove(at: first)
+        if goal.taskList.count > 1 {
+            if let first = offset.first {
+                goal.taskList.remove(at: first)
+            }
         }
     }
     
@@ -106,15 +108,15 @@ struct GoalDetailsView: View {
             ZStack {
                 goal.isPrimary ? Color("PrimaryCardColor").ignoresSafeArea() : Color("SecondaryCardColor").ignoresSafeArea()
                 VStack {
-                    HStack{
+                    HStack {
                         Text(goal.description).multilineTextAlignment(.leading)
                             .fontWeight(.semibold)
                         Spacer()
                     }
-                    .padding(.top, -2.0)
+                    .padding(.top, 12.0)
                     .padding(.leading)
                     .padding(.bottom, +15.0)
-                    HStack{
+                    HStack {
                         Text("Tasks:")
                             .fontWeight(.bold)
                         Spacer()

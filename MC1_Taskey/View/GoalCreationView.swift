@@ -65,7 +65,7 @@ struct GoalCreationView: View {
                     dismiss()
                 }
                     .disabled(goalTitle.isEmpty || goalDescription.isEmpty || taskVM.tasks.isEmpty)
-                )
+            )
             .onSubmit {
                 addTaskToTheList()
             }
