@@ -27,6 +27,7 @@ struct MainView: View {
                 }
                 .onDelete(perform: goalVM.remove)
                 .onMove(perform: move)
+                .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             .sheet(isPresented: $showingGoalDetailsSheet) {
