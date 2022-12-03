@@ -14,43 +14,45 @@ struct CheckBoxView: View {
     @Binding var mode : EditMode
     
     var body: some View {
-        VStack{
-            HStack{
-                mode == .inactive ? Image(systemName: goal.taskList[index].doneStatus ? "checkmark.circle" : "circle")
-                    .font(.system(size: 20))
-                    .foregroundColor(goal.taskList[index].doneStatus ? Color(UIColor.white) : Color.secondary)
-                    .onTapGesture {
-                        if goal.taskList[index].doneStatus == true {
-                            if index < goal.taskList.count-1 && goal.taskList[index+1].doneStatus == true {
-                                return
+        if index < goal.taskList.count {
+            VStack{
+                HStack{
+                    mode == .inactive ? Image(systemName: goal.taskList[index].doneStatus ? "checkmark.circle" : "circle")
+                        .font(.system(size: 20))
+                        .foregroundColor(goal.taskList[index].doneStatus ? Color(UIColor.white) : Color.secondary)
+                        .onTapGesture {
+                            if goal.taskList[index].doneStatus == true {
+                                if index < goal.taskList.count-1 && goal.taskList[index+1].doneStatus == true {
+                                    return
+                                }
+                            } else {
+                                if index > 0 && goal.taskList[index-1].doneStatus == false{
+                                    return
+                                }
                             }
-                        } else {
-                            if index > 0 && goal.taskList[index-1].doneStatus == false{
-                                return
-                            }
-                        }
-                        goal.taskList[index].doneStatus.toggle()
-                    } : nil
-                Text(goal.taskList[index].title)
-                Spacer()
-            }
-            HStack{
-                VStack{
-                    /*
-                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
-                     .resizable()
-                     .frame(width: 10.0, height: 10.0)
-                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
-                     .resizable()
-                     .frame(width: 10.0, height: 10.0)
-                     Image(systemName: task.doneStatus ? "circle.fill" : "circle")
-                     .resizable()
-                     .frame(width: 10.0, height: 10.0)
-                     */
+                            goal.taskList[index].doneStatus.toggle()
+                        } : nil
+                    Text(goal.taskList[index].title)
+                    Spacer()
                 }
-                .padding(.leading, 4)
-                .padding(/*@START_MENU_TOKEN@*/.bottom, -10.0/*@END_MENU_TOKEN@*/)
-                Spacer()
+                HStack{
+                    VStack{
+                        /*
+                         Image(systemName: task.doneStatus ? "circle.fill" : "circle")
+                         .resizable()
+                         .frame(width: 10.0, height: 10.0)
+                         Image(systemName: task.doneStatus ? "circle.fill" : "circle")
+                         .resizable()
+                         .frame(width: 10.0, height: 10.0)
+                         Image(systemName: task.doneStatus ? "circle.fill" : "circle")
+                         .resizable()
+                         .frame(width: 10.0, height: 10.0)
+                         */
+                    }
+                    .padding(.leading, 4)
+                    .padding(/*@START_MENU_TOKEN@*/.bottom, -10.0/*@END_MENU_TOKEN@*/)
+                    Spacer()
+                }
             }
         }
     }
@@ -88,7 +90,7 @@ struct CheckBoxViewList: View {
     func delete(at offset: IndexSet){
         if goal.taskList.count > 1 {
             if let first = offset.first {
-                goal.taskList.remove(at: first)
+                goal.removeTask(index: first)
             }
         }
     }
@@ -108,7 +110,6 @@ struct GoalDetailsView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var goalVM : GoalViewModel
     @State var goal : Goal
-    @State fileprivate var isEditing : Bool = false
     @State var mode : EditMode = .inactive
     @State var currTaskTitle : String = String()
     @State var isFocusMode: Bool = false
@@ -149,7 +150,7 @@ struct GoalDetailsView: View {
                         HStack {
                             Spacer()
                             Button {
-                                if !goal.isCompleted() {
+                                if !goal.isCompleted {
                                     isFocusMode.toggle()
                                 }
                             } label: {
