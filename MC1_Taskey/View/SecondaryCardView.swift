@@ -15,14 +15,13 @@ struct SecondaryCardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color("SecondaryCardColor"))
+                .foregroundColor(Color("SecondaryCardColor 2"))
                 .frame(height: 92)
             HStack {
                 VStack (alignment: .leading){
                     Text(goal.title)
                         .font(.title)
                         .bold()
-                        .foregroundColor(.white)
                 }
                 .padding(.leading, 40)
                 Spacer()

@@ -20,19 +20,17 @@ struct PrimaryCardView: View {
         ZStack {
             //Color("BackgroundColor").ignoresSafeArea()
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(Color("PrimaryCardColor"))
+                .foregroundColor(Color("PrimaryCardColor 1"))
                 .frame(height: 210)
             
             HStack{
                 VStack (alignment: .leading){
                     Text("Your main goal:")
                         .font(.headline)
-                        .foregroundColor(.white)
                     Spacer()
                     Text(goal.title)
                         .font(.title)
                         .bold()
-                        .foregroundColor(.white)
                     ForEach(goal.taskList.prefix(2)){ task in
                         HStack{
                             Label{
@@ -40,6 +38,7 @@ struct PrimaryCardView: View {
                             } icon: {
                                 Image(systemName: task.doneStatus ? "checkmark.circle" : "circle")
                                     .resizable()
+                                    .fontWeight(.semibold)
                                     .frame(width: 12, height: 12)
                                     .foregroundColor(.white)
                             }
@@ -48,7 +47,7 @@ struct PrimaryCardView: View {
                     HStack{
                         Spacer()
                         ZStack{
-                            RoundedRectangle(cornerRadius: 20)
+                            /*RoundedRectangle(cornerRadius: 20)
                                 .foregroundColor(Color("StartButtonMainColor"))
                                 .frame(width: 75, height: 30)
                                 
@@ -57,6 +56,7 @@ struct PrimaryCardView: View {
                             }
                             .bold()
                             .foregroundColor(.white)
+                             */
                         }
                     }
                 }

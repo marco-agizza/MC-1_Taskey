@@ -65,7 +65,7 @@ struct CheckBoxViewList: View {
     
     var body: some View {
         ZStack {
-            goal.isPrimary ? Color("PrimaryCardColor").ignoresSafeArea() : Color("SecondaryCardColor").ignoresSafeArea()
+            goal.isPrimary ? Color("PrimaryCardColor 1").ignoresSafeArea() : Color("SecondaryCardColor 2").ignoresSafeArea()
             List {
                 ForEach(0..<goal.taskList.count, id: \.self) { index in
                     CheckBoxView(goal: $goal, index: index, mode: $mode)
@@ -117,7 +117,7 @@ struct GoalDetailsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                goal.isPrimary ? Color("PrimaryCardColor").ignoresSafeArea() : Color("SecondaryCardColor").ignoresSafeArea()
+                goal.isPrimary ? Color("PrimaryCardColor 1").ignoresSafeArea() : Color("SecondaryCardColor 2").ignoresSafeArea()
                 VStack {
                     HStack {
                         Text(goal.description).multilineTextAlignment(.leading)
@@ -145,7 +145,7 @@ struct GoalDetailsView: View {
                     Spacer(minLength: 580)
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
-                            .foregroundColor(Color("PrimaryAccentColor"))
+                            .foregroundColor(goal.isPrimary ? Color("PrimaryAccentColor 1") : Color("SecondaryAccentColor 1"))
                             .ignoresSafeArea()
                         HStack {
                             Spacer()
@@ -156,7 +156,7 @@ struct GoalDetailsView: View {
                             } label: {
                                 ZStack{
                                     Capsule()
-                                        .foregroundColor(Color("StartButtonMainColor"))
+                                        .foregroundColor(Color(goal.isPrimary ? "StartButtonPrimaryCardColor 1" : "StartButtonSeondaryCardColor"))
                                         .frame(width: 116, height: 60)
                                     Text("START")
                                         .bold()
@@ -192,7 +192,7 @@ struct GoalDetailsView: View {
                     .fontWeight(.semibold)
                     .padding(.trailing, 8)
                     .background(.white)
-                    .foregroundColor(goal.isPrimary ? Color("PrimaryCardColor") : Color("SecondaryCardColor"))
+                    .foregroundColor(goal.isPrimary ? Color("PrimaryCardColor 1") : Color("SecondaryCardColor 2"))
                     .cornerRadius(33)
             )
             .environment(\.editMode, $mode)

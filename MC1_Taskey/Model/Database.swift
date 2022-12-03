@@ -26,7 +26,7 @@ let taskData2 = [
 
 var goalData = [
     Goal(title: "Looking for a new job", description: "You know, I need money", taskList: taskData0, isPrimary: true),
-    Goal(title: "Learn English", description: "To speak", isPrimary: false),
+    Goal(title: "Learn English", description: "To speak", taskList: taskData2, isPrimary: false),
     Goal(title: "Get in shape", description: "", taskList: taskData1, isPrimary: false),
     Goal(title: "Become more confident", description: "Description sample", taskList: taskData2, isPrimary: false)
 ]

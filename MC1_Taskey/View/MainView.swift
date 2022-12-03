@@ -39,7 +39,9 @@ struct MainView: View {
                         print("add a new goal pressed")
                         showingGoalCreationSheet.toggle()
                     } label: {
-                        Label("Add goal", systemImage: "plus.app.fill").font(.system(size: 22))
+                        Label("Add goal", systemImage: "plus.app.fill")
+                            .font(.system(size: 22))
+                            .fontWeight(.bold)
                     }
                     .foregroundColor(.blue)
                     .sheet(isPresented: $showingGoalCreationSheet, content: {
