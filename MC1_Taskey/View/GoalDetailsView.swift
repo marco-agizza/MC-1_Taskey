@@ -9,19 +9,29 @@
 import SwiftUI
 
 struct CheckBoxView: View {
-    @Binding var task : Task
+    @Binding var goal : Goal
+    @State var index : Int
     @Binding var mode : EditMode
     
     var body: some View {
         VStack{
             HStack{
-                mode == .inactive ? Image(systemName: task.doneStatus ? "checkmark.circle" : "circle")
+                mode == .inactive ? Image(systemName: goal.taskList[index].doneStatus ? "checkmark.circle" : "circle")
                     .font(.system(size: 20))
-                    .foregroundColor(task.doneStatus ? Color(UIColor.white) : Color.secondary)
+                    .foregroundColor(goal.taskList[index].doneStatus ? Color(UIColor.white) : Color.secondary)
                     .onTapGesture {
-                        task.doneStatus.toggle()
+                        if goal.taskList[index].doneStatus == true {
+                            if index < goal.taskList.count-1 && goal.taskList[index+1].doneStatus == true {
+                                return
+                            }
+                        } else {
+                            if index > 0 && goal.taskList[index-1].doneStatus == false{
+                                return
+                            }
+                        }
+                        goal.taskList[index].doneStatus.toggle()
                     } : nil
-                Text(task.title)
+                Text(goal.taskList[index].title)
                 Spacer()
             }
             HStack{
@@ -55,8 +65,8 @@ struct CheckBoxViewList: View {
         ZStack {
             goal.isPrimary ? Color("PrimaryCardColor").ignoresSafeArea() : Color("SecondaryCardColor").ignoresSafeArea()
             List {
-                ForEach($goal.taskList) { task in
-                    CheckBoxView(task: task, mode: $mode)
+                ForEach(0..<goal.taskList.count, id: \.self) { index in
+                    CheckBoxView(goal: $goal, index: index, mode: $mode)
                 }
                 .onDelete(perform: goal.taskList.count > 1 ? delete : nil)
                 .onMove(perform: move)
@@ -139,7 +149,9 @@ struct GoalDetailsView: View {
                         HStack {
                             Spacer()
                             Button {
-                                isFocusMode.toggle()
+                                if !goal.isCompleted() {
+                                    isFocusMode.toggle()
+                                }
                             } label: {
                                 ZStack{
                                     Capsule()
@@ -150,19 +162,19 @@ struct GoalDetailsView: View {
                                         .foregroundColor(.white)
                                 }
                             }
-//                            NavigationLink(destination: FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal]), label: {
-//                                ZStack{
-//                                    Capsule()
-//                                        .foregroundColor(Color("StartButtonMainColor"))
-//                                        .frame(width: 116, height: 60)
-//                                    Text("START")
-//                                    .bold()
-//                                    .foregroundColor(.white)
-//                                }
-//                            })
+                            //                            NavigationLink(destination: FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal]), label: {
+                            //                                ZStack{
+                            //                                    Capsule()
+                            //                                        .foregroundColor(Color("StartButtonMainColor"))
+                            //                                        .frame(width: 116, height: 60)
+                            //                                    Text("START")
+                            //                                    .bold()
+                            //                                    .foregroundColor(.white)
+                            //                                }
+                            //                            })
                             .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 15))
                             .fullScreenCover(isPresented: $isFocusMode) {
-                                FocusModeView(currentGoal: $goalVM.goals[goalVM.selectedGoal])
+                                FocusModeView(goalVM: goalVM, currentGoal: $goal)
                             }
                         }
                     }

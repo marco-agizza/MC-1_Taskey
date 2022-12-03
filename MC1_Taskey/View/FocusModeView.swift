@@ -14,6 +14,7 @@ struct FocusModeView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @ObservedObject var goalVM: GoalViewModel
     @Binding var currentGoal: Goal
     
 //    @State private var currentTask: Task?
@@ -80,7 +81,10 @@ struct FocusModeView: View {
                         TextRectangleButton(
                             buttonColor: "PausedButtonColor",
                             buttonText: "STOP",
-                            onTap: { print("Work Stopped") }
+                            onTap: {
+                                print("Work Stopped")
+                                dismiss()
+                            }
                         )
                     }
                 }
@@ -188,14 +192,14 @@ private extension FocusModeView {
 
 //    The current task is the first one in the array which is not done.
 func findCurrentTaskIndex(currentGoal: Goal) -> Int? {
-    print(currentGoal.taskList.firstIndex { $0.doneStatus == false } ?? nil)
+    //print(currentGoal.taskList.firstIndex { $0.doneStatus == false } ?? nil)
     return currentGoal.taskList.firstIndex { $0.doneStatus == false } ?? nil
 }
     
     // MARK: - Preview
     
-struct focusView_Previews: PreviewProvider {
+/*struct focusView_Previews: PreviewProvider {
     static var previews: some View {
         FocusModeView(currentGoal: .constant (goalData[0]))
     }
-}
+}*/

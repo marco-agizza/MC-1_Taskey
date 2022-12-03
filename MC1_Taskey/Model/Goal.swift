@@ -46,4 +46,8 @@ struct Goal : Identifiable {
     mutating func lowerPriority() {
         self.isPrimary = false
     }
+    
+    func isCompleted() -> Bool {
+        return self.taskList.last?.doneStatus ?? false
+    }
 }
