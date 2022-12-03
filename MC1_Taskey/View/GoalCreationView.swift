@@ -53,18 +53,21 @@ struct GoalCreationView: View {
             .padding()
             .accentColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             .navigationBarItems(
-                leading: Button("Cancel"){
+                leading: Button {
                     dismiss()
+                } label: {
+                    Label("Close page", systemImage: "xmark.circle.fill").font(.system(size: 22))
                 },
                 //Add the task number condition to disable the button
-                trailing: Button("Done"){
+                trailing: Button {
                     print("Creating a new goal")
                     goalVM.addGoal(
                         newGoal: Goal(title: goalTitle, description: goalDescription, taskList: taskVM.tasks)
                     )
                     dismiss()
-                }
-                    .disabled(goalTitle.isEmpty || goalDescription.isEmpty || taskVM.tasks.isEmpty)
+                } label: {
+                    Label("Confirm", systemImage: "checkmark.circle.fill").font(.system(size: 22))
+                }.disabled(goalTitle.isEmpty || goalDescription.isEmpty || taskVM.tasks.isEmpty)
             )
             .onSubmit {
                 addTaskToTheList()
